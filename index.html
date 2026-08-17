@@ -3,181 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My AI Studio</title>
+
+<title>MY AI STUDIO</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #0b1020;
-  color: white;
-  min-height: 100vh;
+body{
+  font-family:Arial,sans-serif;
+  background:#070d20;
+  color:white;
+  min-height:100vh;
+  padding:20px;
 }
 
-.app {
-  width: 100%;
-  max-width: 700px;
-  margin: auto;
-  padding: 20px;
+.container{
+  width:100%;
+  max-width:800px;
+  margin:auto;
 }
 
-.header {
-  text-align: center;
-  padding: 25px 10px;
+.header{
+  text-align:center;
+  margin-bottom:25px;
 }
 
-.logo {
-  font-size: 38px;
-  margin-bottom: 8px;
+.logo{
+  font-size:42px;
 }
 
-h1 {
-  font-size: 28px;
+h1{
+  font-size:30px;
+  margin:8px 0;
 }
 
-.subtitle {
-  color: #aab2c8;
-  margin-top: 8px;
-  font-size: 14px;
+.subtitle{
+  color:#9ca8c7;
 }
 
-.card {
-  background: #151c31;
-  border: 1px solid #29324d;
-  border-radius: 18px;
-  padding: 18px;
-  margin-top: 18px;
+.card{
+  background:#111a35;
+  border:1px solid #263354;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
 }
 
-.section-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 12px;
+h2{
+  font-size:20px;
+  margin-bottom:15px;
 }
 
-.modes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+.modes{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.mode {
-  border: 1px solid #39445f;
-  background: #202941;
-  color: white;
-  border-radius: 12px;
-  padding: 14px 5px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 13px;
+.mode{
+  background:#1a2547;
+  border:1px solid #303d65;
+  color:white;
+  padding:15px 8px;
+  border-radius:12px;
+  cursor:pointer;
+  text-align:center;
 }
 
-.mode.active {
-  background: #394a78;
-  border-color: #7188d8;
+.mode.active{
+  background:#405d9d;
+  border-color:#6d8fe8;
 }
 
-textarea {
-  width: 100%;
-  min-height: 130px;
-  background: #0d1324;
-  color: white;
-  border: 1px solid #39445f;
-  border-radius: 12px;
-  padding: 14px;
-  font-size: 15px;
-  resize: vertical;
-  outline: none;
+label{
+  display:block;
+  margin:15px 0 7px;
+  font-weight:bold;
 }
 
-.settings {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 15px;
+textarea,
+select{
+  width:100%;
+  background:#080f25;
+  color:white;
+  border:1px solid #344263;
+  border-radius:12px;
+  padding:13px;
+  font-size:15px;
 }
 
-.setting label {
-  display: block;
-  color: #aab2c8;
-  font-size: 13px;
-  margin-bottom: 7px;
+textarea{
+  min-height:130px;
+  resize:vertical;
 }
 
-select {
-  width: 100%;
-  padding: 13px;
-  border-radius: 10px;
-  border: 1px solid #39445f;
-  background: #0d1324;
-  color: white;
-  font-size: 14px;
-  outline: none;
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-select:focus {
-  border-color: #7188d8;
+.upload{
+  border:1px dashed #52658f;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  margin-top:15px;
 }
 
-.upload {
-  margin-top: 15px;
-  padding: 14px;
-  border: 1px dashed #4b5878;
-  border-radius: 12px;
-  text-align: center;
-  color: #aab2c8;
+.generate{
+  width:100%;
+  margin-top:20px;
+  padding:16px;
+  border:none;
+  border-radius:12px;
+  background:#536fe5;
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-input[type="file"] {
-  margin-top: 10px;
-  max-width: 100%;
+.generate:active{
+  transform:scale(.98);
 }
 
-.generate {
-  width: 100%;
-  margin-top: 15px;
-  padding: 16px;
-  border: none;
-  border-radius: 12px;
-  background: #5b6ee1;
-  color: white;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
+#result{
+  min-height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#8793b2;
 }
 
-.result {
-  text-align: center;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #8993ad;
+#result img,
+#result video{
+  max-width:100%;
+  border-radius:12px;
 }
 
-.footer {
-  text-align: center;
-  color: #68728c;
-  font-size: 12px;
-  padding: 25px 0;
+.loading{
+  color:#8fa5ff;
 }
 
-@media (max-width: 450px) {
-  .modes {
-    grid-template-columns: 1fr;
+.footer{
+  text-align:center;
+  color:#65708c;
+  font-size:13px;
+  margin-top:25px;
+}
+
+@media(max-width:600px){
+
+  body{
+    padding:12px;
   }
 
-  .settings {
-    grid-template-columns: 1fr;
+  .modes{
+    grid-template-columns:1fr;
   }
 
-  h1 {
-    font-size: 24px;
+  .options{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:25px;
   }
 }
 </style>
@@ -185,160 +181,238 @@ input[type="file"] {
 
 <body>
 
-<div class="app">
+<div class="container">
 
   <div class="header">
     <div class="logo">🤖</div>
     <h1>MY AI STUDIO</h1>
-    <p class="subtitle">
+    <div class="subtitle">
       Create images and videos with AI
-    </p>
+    </div>
   </div>
 
   <div class="card">
 
-    <div class="section-title">
-      Choose Generation
-    </div>
+    <h2>Choose Generation</h2>
 
     <div class="modes">
 
       <button class="mode active"
-        onclick="selectMode(this, 'Text → Image')">
+              onclick="setMode('image',this)">
         🖼️<br>
         Text → Image
       </button>
 
       <button class="mode"
-        onclick="selectMode(this, 'Text → Video')">
+              onclick="setMode('video',this)">
         🎬<br>
         Text → Video
       </button>
 
       <button class="mode"
-        onclick="selectMode(this, 'Image → Video')">
-        🖼️➡️🎬<br>
+              onclick="setMode('imagevideo',this)">
+        🖼️ → 🎬<br>
         Image → Video
       </button>
 
     </div>
 
-  </div>
-
-  <div class="card">
-
-    <div class="section-title">
-      Prompt
-    </div>
+    <label>Prompt</label>
 
     <textarea
       id="prompt"
-      placeholder="Describe what you want to create..."
-    ></textarea>
+      placeholder="Describe what you want to create..."></textarea>
 
-    <div class="settings">
+    <div id="uploadBox" class="upload" style="display:none">
 
-      <div class="setting">
+      📁 Upload Image
+
+      <br><br>
+
+      <input
+        type="file"
+        id="imageInput"
+        accept="image/*">
+
+    </div>
+
+    <div class="options">
+
+      <div>
+
         <label>Resolution</label>
 
         <select id="resolution">
-          <option value="512x512">512 × 512</option>
-          <option value="768x768">768 × 768</option>
-          <option value="1024x1024" selected>1024 × 1024</option>
-          <option value="1536x1536">1536 × 1536</option>
-          <option value="1920x1080">1920 × 1080</option>
-          <option value="1080x1920">1080 × 1920</option>
+
+          <option value="512">512 × 512</option>
+
+          <option value="768">768 × 768</option>
+
+          <option value="1024" selected>
+            1024 × 1024
+          </option>
+
+          <option value="1280">
+            1280 × 1280
+          </option>
+
         </select>
+
       </div>
 
-      <div class="setting">
+      <div>
+
         <label>Aspect Ratio</label>
 
         <select id="ratio">
-          <option value="1:1" selected>1:1 — Square</option>
-          <option value="16:9">16:9 — Landscape</option>
-          <option value="9:16">9:16 — Portrait</option>
-          <option value="4:3">4:3</option>
-          <option value="3:4">3:4</option>
+
+          <option value="1:1">
+            1:1 — Square
+          </option>
+
+          <option value="16:9">
+            16:9 — Landscape
+          </option>
+
+          <option value="9:16">
+            9:16 — Portrait
+          </option>
+
+          <option value="4:3">
+            4:3
+          </option>
+
+          <option value="3:4">
+            3:4
+          </option>
+
         </select>
+
       </div>
 
     </div>
 
-    <div class="upload">
-      📁 Upload Image
-      <br>
-      <input type="file" id="imageInput" accept="image/*">
+    <div id="videoOptions" style="display:none">
+
+      <label>Video Duration</label>
+
+      <select id="duration">
+
+        <option value="5">5 seconds</option>
+
+        <option value="10">
+          10 seconds
+        </option>
+
+      </select>
+
     </div>
 
-    <button class="generate" onclick="generate()">
+    <button
+      class="generate"
+      onclick="generate()">
+
       ✨ GENERATE
+
     </button>
 
   </div>
 
+
   <div class="card">
 
-    <div class="section-title">
-      Result
-    </div>
+    <h2>Result</h2>
 
-    <div class="result" id="result">
+    <div id="result">
+
       Your generated image or video will appear here.
+
     </div>
 
   </div>
 
+
   <div class="footer">
-    My AI Studio • Personal AI Generator
+
+    MY AI Studio • Personal AI Generator
+
   </div>
 
 </div>
 
+
 <script>
 
-let selectedMode = "Text → Image";
+let currentMode = "image";
 
-function selectMode(button, mode) {
 
-  document.querySelectorAll(".mode").forEach(function(btn) {
-    btn.classList.remove("active");
-  });
+function setMode(mode,button){
+
+  currentMode = mode;
+
+  document
+    .querySelectorAll(".mode")
+    .forEach(x => x.classList.remove("active"));
 
   button.classList.add("active");
 
-  selectedMode = mode;
+
+  const upload =
+    document.getElementById("uploadBox");
+
+  const video =
+    document.getElementById("videoOptions");
+
+
+  if(mode === "image"){
+
+    upload.style.display = "none";
+
+    video.style.display = "none";
+
+  }
+
+
+  if(mode === "video"){
+
+    upload.style.display = "none";
+
+    video.style.display = "block";
+
+  }
+
+
+  if(mode === "imagevideo"){
+
+    upload.style.display = "block";
+
+    video.style.display = "block";
+
+  }
+
 }
 
-function generate() {
+
+function generate(){
 
   const prompt =
     document.getElementById("prompt").value.trim();
 
-  const resolution =
-    document.getElementById("resolution").value;
-
-  const ratio =
-    document.getElementById("ratio").value;
-
   const result =
     document.getElementById("result");
 
-  if (!prompt) {
 
-    result.innerHTML =
-      "⚠️ Please enter a prompt first.";
+  if(!prompt && currentMode !== "imagevideo"){
+
+    alert("Please enter a prompt.");
 
     return;
+
   }
 
+
   result.innerHTML =
-    "⏳ Generation settings:<br><br>" +
-    "Mode: " + selectedMode +
-    "<br>Resolution: " + resolution +
-    "<br>Aspect Ratio: " + ratio +
-    "<br><br>" +
-    "AI generation backend will be connected here.";
+    '<div class="loading">⏳ AI generation will be connected in the next step...</div>';
 
 }
 
