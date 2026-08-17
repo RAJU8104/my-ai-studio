@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My AI Studio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b1020;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    .logo {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #aab2c8;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .card {
+      background: #151c31;
+      border: 1px solid #29324d;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .modes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mode {
+      border: 1px solid #39445f;
+      background: #202941;
+      color: white;
+      border-radius: 12px;
+      padding: 14px 5px;
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .mode:hover {
+      background: #2b3655;
+    }
+
+    .mode.active {
+      background: #394a78;
+      border-color: #7188d8;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      background: #0d1324;
+      color: white;
+      border: 1px solid #39445f;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #7188d8;
+    }
+
+    .generate {
+      width: 100%;
+      margin-top: 15px;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: #5b6ee1;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .generate:hover {
+      background: #6d7ff0;
+    }
+
+    .upload {
+      margin-top: 12px;
+      padding: 14px;
+      border: 1px dashed #4b5878;
+      border-radius: 12px;
+      text-align: center;
+      color: #aab2c8;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+      max-width: 100%;
+    }
+
+    .result {
+      text-align: center;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8993ad;
+    }
+
+    .footer {
+      text-align: center;
+      color: #68728c;
+      font-size: 12px;
+      padding: 25px 0;
+    }
+
+    @media (max-width: 450px) {
+      .modes {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="header">
+      <div class="logo">🤖</div>
+      <h1>MY AI STUDIO</h1>
+      <p class="subtitle">
+        Create images and videos with AI
+      </p>
+    </div>
+
+    <div class="card">
+
+      <div class="section-title">
+        Choose Generation
+      </div>
+
+      <div class="modes">
+
+        <button class="mode active" onclick="selectMode(this, 'Text → Image')">
+          🖼️<br>
+          Text → Image
+        </button>
+
+        <button class="mode" onclick="selectMode(this, 'Text → Video')">
+          🎬<br>
+          Text → Video
+        </button>
+
+        <button class="mode" onclick="selectMode(this, 'Image → Video')">
+          🖼️➡️🎬<br>
+          Image → Video
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-title">
+        Prompt
+      </div>
+
+      <textarea
+        id="prompt"
+        placeholder="Describe what you want to create..."
+      ></textarea>
+
+      <div class="upload">
+        📁 Upload Image
+        <br>
+        <input type="file" id="imageInput" accept="image/*">
+      </div>
+
+      <button class="generate" onclick="generate()">
+        ✨ GENERATE
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-title">
+        Result
+      </div>
+
+      <div class="result" id="result">
+        Your generated image or video will appear here.
+      </div>
+
+    </div>
+
+    <div class="footer">
+      My AI Studio • Personal AI Generator
+    </div>
+
+  </div>
+
+  <script>
+
+    let selectedMode = "Text → Image";
+
+    function selectMode(button, mode) {
+
+      document
+        .querySelectorAll(".mode")
+        .forEach(function(btn) {
+          btn.classList.remove("active");
+        });
+
+      button.classList.add("active");
+
+      selectedMode = mode;
+    }
+
+    function generate() {
+
+      const prompt =
+        document.getElementById("prompt").value.trim();
+
+      const result =
+        document.getElementById("result");
+
+      if (!prompt) {
+
+        result.innerHTML =
+          "⚠️ Please enter a prompt first.";
+
+        return;
+      }
+
+      result.innerHTML =
+        "⏳ " +
+        selectedMode +
+        "<br><br>" +
+        "AI generation backend will be connected here.";
+
+    }
+
+  </script>
+
+</body>
+</html>
